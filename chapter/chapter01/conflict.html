@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>reslove jQuery conflict</title>
+</head>
+<body>
+<div id="confict">conflict</div>
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script src="../../lib/my$.js"></script>
+<script>
+    //打印当前$的代表
+    alert($);//结果是自定义的那个方法，而不再是指向jQuery定义
+
+    //此时这样书写就会出问题
+    /*$(function(){
+
+    });
+    */
+
+    //解决冲突
+
+    //全局
+
+    //1.使用jQuery代替简称$
+    jQuery(function(){
+        alert("xxxxxx");
+    })
+    //2.使用自定义简称
+    var $$= jQuery.noConflict();
+    $$(function(){
+        alert("html:"+$$("#confict").html());
+    });
+
+    //局部解决:原来就是使用立即执行函,将jQuery 对象赋值给$,从而继续使用
+    (function($){
+        $(function(){
+            alert("局部解决方案后,仍然使用$");
+        });
+    })(jQuery);
+</script>
+</body>
+</html>

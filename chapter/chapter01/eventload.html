@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>window onload vs $()</title>
+</head>
+<body>
+<img src="http://images.google.com/"/>
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+    /**
+     *$() vs window.onload
+     *
+     * 1.加载的阶段不同
+     *
+     * 2.加载的次数不一样
+     *
+     */
+
+
+    window.onload=function(){
+        //等页面上的dom加载完毕(包括图片后才进行触发)
+        alert("load.......once");
+    }
+
+    window.onload=function(){
+        alert("load....twice");
+    }
+
+    $(function(){
+        //dom 结构加载完毕后
+        alert("jQuery load....once");
+    });
+    $(function(){
+        alert("jQuery load....twice");
+    });
+</script>
+</body>
+</html>
