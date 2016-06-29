@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>javascript 对象与jQuery 对象相互转换</title>
+</head>
+<body>
+<div id="change">test for chage</div>
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+
+    var jsDom=document.getElementById("change");
+    console.log("通过js 对象输出innerHtml:"+jsDom.innerHTML);
+    $(function () {
+        //js dom Object --->jQuery Object
+        var $jsDom=$(jsDom);
+        console.log("通过jQuery 提供的方法输出html内容:"+$jsDom.html());
+        //jQuery object---->js object
+        var jsDom1by$jsdom=$jsDom.get(0);
+        console.log("通过jQuery.get(0)转为js对象"+jsDom1by$jsdom.innerHTML);
+        var jsDom2by$jsdom=$jsDom[0];
+        console.log("通过jQuery[0]转为js对象"+jsDom2by$jsdom.innerHTML);
+    });
+</script>
+</body>
+</html>
