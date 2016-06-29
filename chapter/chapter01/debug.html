@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>供调试使用-chrome developer tools</title>
+</head>
+<body>
+<button onclick="test()">简单测试调试</button>
+<button id="keyEventListner">test keyevent 监听</button>
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+    /**
+     * 简单调试
+     * 1.进行调试的地方打断点
+     */
+    function test(){
+        var i=1+2;
+        var sum=i+5;
+        alert(sum);
+    }
+    $(function () {
+        /**
+         * 对于有引用的进行调试(我们不知道在哪打断点,只知道什么时候触发这件事)
+         * 操作:
+         * 1.选中你需要监听的事件类型:如mouse--->click 事件进行监听
+         * 2.在source->local里面查看当前操作的元素,点击跳转到element,进行事件查看就能定位到具体的方法
+         */
+        $("#keyEventListner").on("click",function(){
+            var msg="触发了click事件";
+            alert(msg);
+        })
+    });
+</script>
+</body>
+</html>

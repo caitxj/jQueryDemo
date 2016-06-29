@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简单使用jQuery vs javascript 操作</title>
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <style>
+        /*table tr:nth-child(2n){*/
+            /*background-color: blue;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<h1>使用javascript 与 jQuery 实现 表格隔行变色</h1>
+<table class="table table-bordered">
+    <tr>
+        <td>1</td>
+        <td>2</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>4</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>6</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>8</td>
+    </tr>
+</table>
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+    //javascript
+  function changeTableColorByJS(){
+      /**
+       * 实现思路:
+       */
+      var trs=document.getElementsByTagName("table")[0].getElementsByTagName("tr");
+      for(var i= 0,j=trs.length;i<j;i++){
+            if(i%2==0){
+                trs[i].style.backgroundColor="pink";
+            }
+      }
+  }
+//    changeTableColorByJS()
+
+
+    //jQuery
+    $(function(){
+        //使用这种方式不成功的原因:我们的table 创建的格式如:table 下直接就是tr
+        //而实际通过浏览器渲染则为:table>tbody>tr
+//        $("table > tr:odd").addClass("highColor");
+
+        //实现给table下隔行换色
+        $("table tr:odd").css("backgroundColor","pink");
+    });
+</script>
+</body>
+</html>
