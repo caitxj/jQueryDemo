@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择器测试容器</title>
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <style>
+        .my_selected_test {
+            border: 2px solid red;
+        }
+
+        .leftPane {
+            border: 1px solid gray;
+            height: 500px;
+        }
+
+        .rightPane {
+            border: 1px solid gray;
+            height: 100%;
+        }
+
+        .top {
+            margin-top: 40px;
+        }
+        textarea{
+            height:400px;
+            overflow: scroll;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid top">
+    <div class="row">
+        <div class="col-lg-3 col-lg-offset-1 leftPane">
+            <div>
+                请输入选择器:
+                <input type="text" class="input-sm" id="searchSelectors">
+                <button class="btn btn-primary" id="searchBySelectors">查找</button>
+                <div>
+                    jQuery statement:
+                    <p>
+                        selected:<span id="selectNumbers"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 rightPane">
+            <h1>基本选择器</h1>
+            <div>
+                <p id="pid">test id selector</p>
+                <p class="pclass"> test class </p>
+                <p> test p element</p>
+            </div>
+            <h1>属性选择器</h1>
+            <a href="http://">www.baidu.com</a>
+            <a href="">空链接</a>
+            <h1>层次结构选择器</h1>
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+            <ol>
+                <li>o1</li>
+                <li>o2</li>
+                <li>o3</li>
+                <li>o4</li>
+            </ol>
+            <h1>过滤器选择器</h1>
+            <form action="">
+                hidden:<input type="hidden">
+                name:<input type="text">
+                pwd:<input type="password">
+                email:<input type="email">
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <textarea class="col-lg-12">
+
+<h1>基本选择器</h1>
+            <div>
+                <p id="pid">test id selector</p>
+                <p class="pclass"> test class </p>
+                <p> test p element</p>
+            </div>
+        <h1>属性选择器</h1>
+            <a href="http://">www.baidu.com</a>
+            <a href="">空链接</a>
+        <h1>层次结构选择器</h1>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <ol>
+            <li>o1</li>
+            <li>o2</li>
+            <li>o3</li>
+            <li>o4</li>
+        </ol>
+        <h1>过滤器选择器</h1>
+        <form action="">
+            hidden:<input type="hidden">
+            name:<input type="text">
+            pwd:<input type="password">
+            email:<input type="email">
+        </form>
+        </textarea>
+    </div>
+</div>
+
+
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+
+    $(function () {
+        var selectedElements;
+        $("#searchBySelectors").on("click", function () {
+            if(selectedElements&&selectedElements.length>0){
+                selectedElements.removeClass("my_selected_test");
+            }
+            var selector = $("#searchSelectors").val();
+            if(selector==""){
+                $("#selectNumbers").html("0");
+                return;
+            }
+            selectedElements=$(selector).addClass("my_selected_test");
+            if(selectedElements&&selectedElements.length>0){
+                $("#selectNumbers").html(selectedElements.length);
+            }else{
+                $("#selectNumbers").html("0");
+            }
+        });
+
+    });
+
+
+</script>
+</body>
+</html>

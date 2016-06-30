@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义过滤器选择器</title>
+</head>
+<body>
+<div data-points="11">11</div>
+<div data-points="22">22</div>
+<div data-points="33">33</div>
+<div data-points="44">44</div>
+<div data-points="55">55</div>
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+    $(function () {
+        /**
+         * 实现步骤
+         * 注册一个过滤选择器到:
+         * 1.  $.expr[':'].filterName
+         * 2.  $.expr.creatPseudo()
+         *
+         */
+        $.expr[':'].pointsHigherThan = $.expr.createPseudo(function(filterParam) {
+            var points = parseInt(filterParam, 10);
+            return function(element, context, isXml) {
+                return element.getAttribute('data-points') > points;
+            };
+        })
+
+        var select=$("div[data-points]:pointsHigherThan(22)");
+        var $selects=select.each(function(i,item){
+            console.log("value:"+item.innerHTML);
+        })
+        console.log("test....");
+    });
+</script>
+</body>
+</html>
