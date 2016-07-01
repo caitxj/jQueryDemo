@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手风琴</title>
+    <style>
+        .list{
+            display: none;
+        }
+        .active{
+            display: block;
+        }
+        div.header{
+            background-color: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="header">第一章</div>
+    <ul class="list active">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</div>
+<div>
+    <div class="header">第二章</div>
+    <ul class="list">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</div>
+<div>
+    <div class="header">第三章</div>
+    <ul class="list">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</div>
+
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+
+    $(function(){
+        $("div.header").on("click",function(){
+            $("ul.list").removeClass("active");
+            $(this).next().addClass("active");
+        });
+    });
+</script>
+</body>
+</html>

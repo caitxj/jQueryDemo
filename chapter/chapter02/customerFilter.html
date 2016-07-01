@@ -16,8 +16,8 @@
         /**
          * 实现步骤
          * 注册一个过滤选择器到:
-         * 1.  $.expr[':'].filterName
-         * 2.  $.expr.creatPseudo()
+         * 1.  $.expr[':'].filterName 定义一个自定义过滤器
+         * 2.  $.expr.creatPseudo() 创建过滤器对应的函数
          *
          */
         $.expr[':'].pointsHigherThan = $.expr.createPseudo(function(filterParam) {
@@ -31,7 +31,6 @@
         var $selects=select.each(function(i,item){
             console.log("value:"+item.innerHTML);
         })
-        console.log("test....");
     });
 </script>
 </body>
