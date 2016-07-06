@@ -6,6 +6,10 @@
 </head>
 <body>
 <div id="change">test for chage</div>
+<ul>
+    <li>1</li>
+    <li>2</li>
+</ul>
 <script src="../../lib/jquery-1.12.2.js"></script>
 <script>
 
@@ -20,6 +24,14 @@
         console.log("通过jQuery.get(0)转为js对象"+jsDom1by$jsdom.innerHTML);
         var jsDom2by$jsdom=$jsDom[0];
         console.log("通过jQuery[0]转为js对象"+jsDom2by$jsdom.innerHTML);
+        /**
+         * 多个元素的选择，通过不同的index进行元素的获取
+         * @type {*|jQuery|HTMLElement}
+         */
+        var lis=$("li");
+        alert(lis.get(0).innerHTML);
+        alert(lis.get(1).innerHTML);
+
     });
 </script>
 </body>

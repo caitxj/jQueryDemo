@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>幻灯片播放</title>
+    <style>
+        img{
+            width:300px;
+            height:300px;
+        }
+        #imageContainer{
+            width:300px;
+            overflow: hidden;
+        }
+        #imageList{
+            width: 1200px;
+            float: left;
+        }
+        .image{
+            width:300px;
+            float:left;
+        }
+
+        .image div{
+            text-align: center;
+            background-color: rgba(128, 128, 128, 0.52);
+            padding: 5px;
+        }
+        .btnOp{
+            clear: both;
+        }
+    </style>
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+</head>
+<body>
+    <div id="imageContainer">
+        <div id="imageList">
+            <div class="image">
+                <img src="../../img/1.jpg" alt="">
+                <div>图片</div>
+            </div>
+            <div class="image">
+                <img src="../../img/2.jpg" alt="">
+                <div>图片2</div>
+            </div>
+            <div class="image">
+                <img src="../../img/2.jpg" alt="">
+                <div>图片3</div>
+            </div>
+            <div class="image">
+                <img src="../../img/2.jpg" alt="">
+                <div>图片4</div>
+            </div>
+        </div>
+    </div>
+<div class="btnOp">
+    <button class="btn btn-primary" id="stopImage">Stop</button>
+    <button id="startImage" class="btn btn-primary">Start</button>
+</div>
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+    function startImage(){
+
+    }
+    $(function () {
+        var startInterVal;
+        //iwidth+margin<width:向左移动
+        //iwidth+margin=width:恢复到最初
+        $("#startImage").on("click", function () {
+            startInterVal=setInterval(function () {
+                var marginLeft=$("#imageList").css("marginLeft");
+                var mLeft=parseInt(marginLeft);
+                var width=$("#imageList").width();
+                var imageWidth=$(".image").width();
+                if((imageWidth+Math.abs(mLeft))<width){
+                    var toLeft=(mLeft-300)+"px";
+                    $("#imageList").css("marginLeft",toLeft);
+                }else{
+                    $("#imageList").css("marginLeft","0px");
+                }
+            },1000);
+        });
+
+        $("#stopImage").on("click", function () {
+            clearInterval(startInterVal);
+        });
+
+
+    });
+</script>
+</body>
+</html>

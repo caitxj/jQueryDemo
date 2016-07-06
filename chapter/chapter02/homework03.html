@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <title>实现表格全选与反选</title>
     <link rel="stylesheet" href="../../css/bootstrap.css">
+    <style>
+        .selected {
+            background-color: gray;
+        }
+        .hoveSelect{
+            background-color: pink;
+        }
+    </style>
 </head>
 <body>
 <div class="container-fluid">
@@ -43,7 +51,52 @@
 
 <script src="../../lib/jquery-1.12.2.js"></script>
 <script>
+  /**
+   * attr:html额外属性
+   * prop:html自带属性，建议最好使用这个
+   * 比如：获取checked时，使用attr可能会有问题，prop则没问题
+   * */
     $(function(){
+        /**
+         * 1.判断当前选中情况
+         * 2.获取所以行
+         */
+        $("#selectAll").on("click",function(){
+//            alert($(this).attr("checked")+":"+$(this).prop("checked"));
+            var checked=this.checked;
+            var trs=$("table tr:gt(0)");
+            $("#checkOther").prop("checked",false);
+            if(checked){
+                trs.find("input").prop("checked",true);
+                $("table tr:gt(0)").addClass("selected");
+            }else{
+                trs.find("input").prop("checked",false);
+                trs.removeClass("selected");
+            }
+        });
+
+        $("#checkOther").on("click", function () {
+            var checked=$(this).prop("checked");
+            $("#selectAll").prop("checked",false);
+            var inputs=$("table tr:gt(0)").find("input");
+               //实现反选
+                var inputs=$("table tr:gt(0)").find("input");
+                inputs.each(function(index,item){
+                    if(item.checked){
+                        item.checked=false;
+                        $(item).parents("tr").removeClass("selected");
+                    }else{
+                        item.checked=true;
+                        $(item).parents("tr").addClass("selected");
+                    }
+                })
+        });
+        //hover
+        $("table tr:gt(0)").hover(function(){
+            $(this).addClass("hoveSelect");
+        },function(){
+            $(this).removeClass("hoveSelect");
+        });
 
     });
 </script>

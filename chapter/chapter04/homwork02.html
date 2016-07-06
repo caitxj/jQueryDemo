@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>流式菜单</title>
+    <style>
+        ul.mainList>li{
+            display: inline-block;
+            width:23%;
+            list-style: none;
+            background-color: lightskyblue;
+            color:white;
+            text-align: center;
+            padding: 10px;
+        }
+        ul.subList{
+            list-style: none;
+            z-index: 10000;
+            color:black;
+            float:left;
+            margin-top:5px;
+            width: 100%;
+            display: none;
+        }
+        ul.subList>li{
+            text-align: center;
+            padding: 4px;
+            cursor: pointer;
+        }
+
+        .selectItem{
+            background-color: red;
+        }
+
+    </style>
+</head>
+<body>
+<ul class="mainList">
+    <li>
+      <div>首页</div>
+        <ul class="subList">
+            <li><a href="#">官网1</a></li>
+            <li><a href="#">官网2</a></li>
+            <li><a href="#">官网3</a></li>
+        </ul>
+    </li>
+    <li>会员
+        <ul class="subList">
+            <li><a href="#">官网1</a></li>
+            <li><a href="#">官网2</a></li>
+            <li><a href="#">官网3</a></li>
+        </ul>
+    </li>
+    <li>查询</li>
+    <li>帮助</li>
+</ul>
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+    $(function () {
+        $("ul.mainList>li").hover(function () {
+            $(this).find("ul.subList").show();
+        }, function () {
+            $(this).find("ul.subList").hide();
+        });
+
+        $("ul.subList>li").hover(function () {
+            $(this).addClass("selectItem");
+        }, function () {
+            $(this).removeClass("selectItem");
+        });
+
+    });
+</script>
+</body>
+</html>

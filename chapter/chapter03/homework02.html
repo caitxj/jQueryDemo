@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现左右转换菜单</title>
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <style>
+        #left{
+            float:left;
+            border: 1px solid gray;
+        }
+        #right{
+            float:right;
+            border: 1px solid gray;
+        }
+        select{
+            width:200px;
+            height:400px !important;
+        }
+        #main{
+            float: left;
+            margin-left: 200px;
+
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <div id="left">
+        <select name="" id="leftSelect" multiple>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+    <div id="right">
+        <select name="" id="rightSelect" multiple></select>
+    </div>
+    <div>
+        <button class="btn btn-primary" id="toRight">全部往右</button><button class="btn btn-primary" id="toLeft">全部往左</button>
+        <button class="btn btn-primary" id="toSelectToRight">移动已经选中的到左</button><button class="btn btn-primary" id="toSelectToLeft">移动已经选中的到左</button>
+    </div>
+</div>
+
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+    $(function(){
+        $("#toRight").on("click", function () {
+            var options=$("#leftSelect option");
+            $("#rightSelect").append(options);
+            $("#leftSelect option").remove();
+        });
+
+        $("#toLeft").on("click", function () {
+            var options=$("#rightSelect option");
+            $("#leftSelect").append(options);
+            $("#rightSelect option").remove();
+        });
+        $("#toSelectToRight").on("click", function () {
+            var options=$("#leftSelect option:selected");
+            $("#rightSelect").append(options);
+            $("#leftSelect option:selected").remove();
+        });
+        $("#toSelectToLeft").on("click", function () {
+            var options=$("#rightSelect option:selected");
+            $("#leftSelect").append(options);
+            $("#rightSelect option:selected").remove();
+        });
+    });
+</script>
+</body>
+</html>

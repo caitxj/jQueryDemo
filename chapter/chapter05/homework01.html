@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单验证</title>
+    <style>
+        .input {
+            float: left;
+            width: 75%;
+        }
+
+        .errorinput {
+            float: right;
+            width: 24%;
+        }
+
+        .forminput {
+            width: 400px;
+            clear: both;
+            padding-bottom: 50px;
+        }
+        .error{
+            background-color: palevioletred;
+        }
+    </style>
+</head>
+<body>
+<form action="">
+
+    <div class="forminput">
+        <div class="input">Account:<input type="text" must="true"></div>
+        <div class="errorinput"></div>
+    </div>
+    <div class="forminput">
+        <div class="input">Name:<input type="text"></div>
+        <div class="errorinput"></div>
+    </div>
+    <div class="forminput">
+        <input type="submit" value="提交"/>
+    </div>
+</form>
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+    $(function () {
+
+        $(":submit").on("click", function (event) {
+            var errors=0;
+            var inputs = $(":input");
+            inputs.each(function (index, item) {
+                $(item).on("keyup", function () {
+                    var val=$(this).val();
+                    if(val!=""){
+                        $(this).removeClass("error");
+                        $(this).parent().next().html("");
+                    }else{
+                        $(this).addClass("error");
+                        $(this).parent().next().html("用户名不能为空!!");
+                    }
+                });
+                var require = $(item).attr("must");
+                if (require) {
+                    if($(item).val()==""){
+                        $(item).addClass("error");
+                        $(item).parent().next().html("用户名不能为空!!");
+                        errors++;
+                        event.preventDefault();
+                    }else{
+                        $(item).removeClass("error");
+                        $(item).parent().next().html("");
+                    }
+                }
+            });
+        });
+
+    });
+</script>
+</body>
+</html>

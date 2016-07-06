@@ -10,7 +10,7 @@
 <button class="btn btn-primary" onclick="opTableDomByJS('add')">添加行ByJS</button>
 <button id="addTableRow" class="btn btn-primary">添加行ByjQuery</button>
 <table id="myTable" class="table table-bordered">
-    <tr>W
+    <tr>
         <td>1</td>
         <td>2</td>
     </tr>
@@ -27,7 +27,8 @@
         <td>8</td>
     </tr>
 </table>
-<script src="../../lib/jquery-1.12.2.js"></script>
+<!--<script src="../../lib/jquery-1.12.2.js"></script>-->
+<script src="../../lib/jquery-1.7.2.js"></script>
 <script>
     function  opTableDomByJS(op){
         if(op=="add"){
@@ -53,6 +54,12 @@
             var tr=$("<tr><td>new td1</td><td>new td2</td></tr>");
             $("#myTable").append(tr);
         });
+        /**
+         * 可以绑定还未生成的元素
+         */
+       /* $("table tr").live("click", function () {
+            alert("click");
+        });*/
     });
 </script>
 </body>
