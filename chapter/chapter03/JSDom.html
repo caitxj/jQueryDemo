@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<title>javaScript dom 操作</title>
+
+    <style>
+        /*div{*/
+            /*background-color: ;*/
+        /*}*/
+        
+        .highClass{
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+<div id="test" myid="myid"></div>
+<input type="checkbox" id="chb" > checked
+
+<hr>
+<button>empty|remove</button>
+<ul>
+    <li onclick="liClicks()">1</li>
+    <li>2</li>
+    <li>3</li>
+</ul>
+<input type="text" value="1"><input type="text" value="2"><input type="text" value="3">
+<script src="../../lib/jquery-1.12.2.js"></script>
+<!--<script src="../../lib/jquery-1.7.2.js"></script>-->
+<script>
+    function liClicks(){
+        alert("click");
+    }
+    //使用javascript创建元素
+    function  createDom(){
+        var h1Dom=document.createElement("h1");
+        h1Dom.innerHTML="WWE";
+        document.getElementById("test").appendChild(h1Dom);
+    }
+    createDom();
+
+    $(function(){
+
+        /**
+         *测试attr 与 prop的异同点
+         *
+         * 获取html元素固有的属性时，我们使用 prop
+         * 获取自定义的  attr
+         *
+        */
+        //测试html 元素内置的属性
+        var idByAttr=$("#test").attr("id");
+        var jsAttr=document.getElementById("test").getAttribute("id");
+        var idByProp=$("#test").prop("id");
+        console.log(idByAttr+":"+idByProp+"|jsID:"+jsAttr);
+
+        //测试自定义属性结果
+        var myidByAttr=$("#test").attr("myid");
+        var myidByProp=$("#test").prop("myid");
+        console.log(myidByAttr+":"+myidByProp);
+
+
+        /**
+         * 对于check之类的选择框,通过attr与prop出来的效果不一致
+         * attr:未选中 undefined  选中 checked
+         *prop : 未选中 false  选中 true
+         */
+        var checkedByAttr=$("#chb").attr("checked");
+        var checkedByProp=$("#chb").prop("checked");
+        console.log(checkedByAttr+":"+checkedByProp);
+
+
+        /**
+         * text()------------> js innerText
+         * html()-------------> js innerHTML
+         *
+         */
+//        document.getElementById("id").innerText;
+
+
+        /**
+            测试CSS 属性名书写方式
+         属性名：css 样式中怎么写的，这儿就怎么写| 去掉-  首字母大写
+         */
+//        $("#test").css("background-color","red");
+
+//        $("#test").css("backgroundColor","red");
+
+
+        //测试:  新增、替换、删除
+        var nh1=$("<h1>test new append</h1>");
+        $("body").append(nh1);
+
+        $("h1:last").replaceWith("<h2>replace h2 </h2>");
+
+        //empty  VS  remove
+
+        //empty:清空元素的子节点
+
+//        $("ul>li").on("click", function () {
+//            alert($(this).html());
+//        });
+
+        $("button").on("click", function () {
+//            $("ul>li").empty();
+//            var ls=$("ul").empty();
+//            console.log(ls);
+
+            //remove  移除后的元素再次添加，他所绑定的事件、值等都被删除掉
+//            var rli=$("ul>li").remove();
+//            console.log(rli);
+//
+//            $("ul").append(rli);
+
+
+            //addClass
+//            $("ul>li").addClass("highClass");
+
+            var lis=document.getElementsByTagName("ul")[0].getElementsByTagName("li");
+            for(var i=0;i<lis.length;i++){
+                lis[i].classList.add("highClass");
+            }
+
+        });
+            //遍历元素
+            var lis=$("ul").children();
+            console.log(lis);
+
+
+        console.log("val:"+$("input[type='text']").val());
+
+//        $("ul>li").attr("class","highClass");
+
+        //clone
+        $("ul").clone(true).prependTo("div");
+
+
+    });
+</script>
+</body>
+</html>

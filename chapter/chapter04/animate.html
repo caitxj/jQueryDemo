@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动画测试</title>
+    <style>
+        .hidden{
+            display: none;
+        }
+        div{
+            border: 2px solid gray;
+        }
+        td{
+            width:200px;
+            height: 60px;
+            border: 1px solid gray;
+        }
+    </style>
+</head>
+<body>
+<button>show</button>
+<div class="hidden">test test is ok .................................</div>
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+    $(function () {
+
+
+
+        $("button").on("click", function () {
+            //封装好的动画进行显示
+//            $("div").show("slow");
+
+            //使用animate进行动画操作
+            //不支持颜色相关的动画操作
+            $("div").removeClass("hidden").animate({
+                marginLeft:"100",
+                height:'+70px',
+                backgroundColor:"red"
+            },2000);
+        });
+
+
+    })
+</script>
+</body>
+</html>

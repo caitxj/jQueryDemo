@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery 创建元素与html创建元素进行比较</title>
+</head>
+<body>
+<button>click</button>
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+
+    $(function () {
+
+        //$(html) 创建元素
+        $("button").click(function () {
+//            var h1=$("<h1>create Dom</h1>")
+//            $("body").append(h1);
+
+            $("body").html("<h2 class='h2'>wwwe</h2>");
+
+            $(".h2").on("click", function () {
+                alert("11");
+            });
+
+
+        });
+
+
+    });
+</script>
+</body>
+</html>

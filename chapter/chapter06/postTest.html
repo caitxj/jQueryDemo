@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>post Test</title>
+</head>
+<body>
+
+
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+    $(function () {
+        $.post("data.json", function (data) {
+            alert(data.id+":"+data.name);
+        });
+
+        //测试 dataType 为 xml格式的数据
+
+
+
+
+    });
+</script>
+</body>
+</html>

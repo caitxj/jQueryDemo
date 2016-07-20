@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$.get 测试</title>
+</head>
+<body>
+
+
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+    $(function () {
+        
+        $.get("http://localhost:8080/mvtest/FirstServelt",{
+            op:"jsonp"
+        }, function (data) {
+            alert(data);
+        });
+    });
+</script>
+</body>
+</html>

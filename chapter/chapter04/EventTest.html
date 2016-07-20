@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件相关测试</title>
+</head>
+<body>
+<a href="http://wwww.baidu.com" target="_blank">BaiDu</a>
+<button id="btn_eve_once">绑定一次性事件</button>
+<div id="outer_eve">
+<button id="btn_eve">绑定事件</button>
+</div>
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+    $(function () {
+
+
+        $("a").on("click", function (event) {
+
+            alert("type:"+event.type+"|target:"+event.target);
+            //阻止默认行为 :a 默认行为 是跳转链接
+            event.preventDefault();
+
+        });
+        $("#outer_eve").on("click", function () {
+            alert("outter");
+        });
+
+        $("#btn_eve").on("click",function(event){
+            alert("inner btn click");
+//            event.stopPropagation();
+        });
+
+    });
+</script>
+</body>
+</html>

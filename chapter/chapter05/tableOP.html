@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格动态操作</title>
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <style>
+        .saveControl {
+            display: none;
+        }
+
+        .errorInfo {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<fieldset>
+    <legend>用户信息录入</legend>
+    <form>
+        <table id="addUserInfoTable">
+            <tr>
+                <td>用户名:</td>
+                <td>
+                    <input type="text" id="userName" class="input-sm">
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>性别:</td>
+                <td>
+                    <input type="radio" value="男" name="sex" checked="checked"> 男 | <input type="radio" value="女"
+                                                                                           name="sex"> 女
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>年龄:</td>
+                <td><input type="text" id="userAge"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3" align="center">
+                    <input id="addUserInfo" type="button" value="添加" class="btn btn-primary">
+                    <input type="reset" value="重置" class="btn btn-danger">
+                </td>
+            </tr>
+        </table>
+    </form>
+</fieldset>
+<h3>用户数据展示</h3>
+<!--<form action="">-->
+查询条件:<input type="text" id="searchValue">
+<button id="searchUserInfo" class="btn btn-primary">查询</button>
+<!--</form>-->
+<table id="userList" class="table table-bordered">
+    <thead>
+    <tr>
+        <th>用户名</th>
+        <th>性别</th>
+        <th>年龄</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>MJ</td>
+        <td>男</td>
+        <td>22</td>
+        <td>
+                <span class="opControl">
+                    <button class="btn btn-primary">编辑</button>
+                    <button class="btn btn-danger">删除</button>
+                </span>
+                 <span class="saveControl">
+                    <button class="btn btn-primary">取消</button>
+                    <button class="btn btn-danger">保存</button>
+                </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+    //查找用户信息方法
+    function searchUserInfo() {
+        var searchValue = $("#searchValue").val();
+        //:contains
+        $("#userList>tbody>tr").hide().filter(":contains('" + searchValue + "')").show();
+    }
+    //用户信息判断及添加
+    function checkUserInfoAndAdd() {
+        //存放数据结果
+        var data = {};
+        var userName = $("#userName");
+        var sex = $("input[name='sex']:checked");
+        var age = $("#userAge");
+
+        if (userName.val() == "") {
+            userName.parent().next().addClass("errorInfo").html("用户姓名不能为空");
+        } else {
+            userName.parent().next().removeClass("errorInfo").html("");
+        }
+        if (age.val() == "") {
+            age.parent().next().addClass("errorInfo").html("年龄不能为空");
+        }
+        if (age.val() != "") {
+            //正则表达式进行匹配
+            var ageReg = /^[1-9][0-9]{1,2}$/g;
+            if (!ageReg.test(age.val())) {
+                age.parent().next().addClass("errorInfo").html("年龄不正确");
+            } else {
+                age.parent().next().removeClass("errorInfo").html("");
+            }
+        }
+        //判断是否 存在错误信息
+        if ($("#addUserInfoTable tr:has(.errorInfo)").length > 0) {
+            data.result = false;
+        } else {
+            data.result = true;
+        }
+        var name = userName.val();
+        var userAge = age.val();
+        var usersex = sex.val();
+        data.name = name;
+        data.age = userAge;
+        data.sex = usersex;
+        return data;
+    }
+    $(function () {
+
+        /***
+         * 需求:
+         * 1.实现用户数据的验证及添加显示到表格中
+         * 2.实现对表格的扩展(编辑当前及删除行)
+         *
+         *
+         * 扩展:
+         * 1.实现对表格的全选、反选功能 及实现批量删除操作
+         * 2.实现通过监听回车键 触发查询数据
+         *
+         *
+         */
+            //按钮绑定进行点击查询
+        $("#searchUserInfo").click(function () {
+//            var searchValue=$("#searchValue").val();
+//
+//            //:contains
+//
+//            $("#userList>tbody>tr").hide().filter(":contains('"+searchValue+"')").show();
+
+            searchUserInfo();
+
+        });
+        //监听回车键触发监听
+        $("#searchValue").keydown(function (event) {
+            //简单回车触发
+            if (event.keyCode == 13) {
+                searchUserInfo();
+            }
+        });
+        $("#addUserInfo").click(function () {
+
+            /*
+             验证方式1：
+             */
+            //1.获取数据并验证
+//            var userName=$("#userName");
+//            var sex=$("input[name='sex']:checked");
+//            var age=$("#userAge");
+//
+//            if(userName.val()==""){
+//                userName.parent().next().addClass("errorInfo").html("用户姓名不能为空");
+//            }else{
+//                userName.parent().next().removeClass("errorInfo").html("");
+//            }
+//            if(age.val()==""){
+//                age.parent().next().addClass("errorInfo").html("年龄不能为空");
+//            }
+//            if(age.val()!=""){
+//                //正则表达式进行匹配
+//                var ageReg=/^[1-9][0-9]{1,2}$/g;
+//                if(!ageReg.test(age.val())){
+//                    age.parent().next().addClass("errorInfo").html("年龄不正确");
+//                }else{
+//                    age.parent().next().removeClass("errorInfo").html("");
+//                }
+//            }
+//            //判断是否 存在错误信息
+//            if($("#addUserInfoTable tr:has(.errorInfo)").length>0){
+//                return;
+//            }
+//            var name=userName.val();
+//            var userAge=age.val();
+//            var usersex=sex.val();
+
+            /**
+             * 验证方式2：
+             */
+            var data = checkUserInfoAndAdd();
+            if (!data.result) {
+                return;
+            }
+
+            //2.添加数据到list中
+
+            addUserInfoToTable(data);
+
+            //添加静态测试数据，查看效果
+//            var $tr = $("<tr></tr><td>mj</td><td>男</td><td>44</td><td>   <span class='opControl'> <button data-type='editor' class='btn btn-primary'>编辑</button> <button data-type='remove' class='btn btn-danger'>删除</button> </span> <span class='saveControl'> <button data-type='cancle' class='btn btn-primary'>取消</button> <button data-type='save' class='btn btn-danger'>保存</button> </span></td></tr>");
+//            var $tr = $("<tr></tr><td>" + data.name + "</td><td>" + data.sex + "</td><td>" + data.age + "</td><td>   <span class='opControl'> <button data-type='editor' class='btn btn-primary'>编辑</button> <button data-type='remove' class='btn btn-danger'>删除</button> </span> <span class='saveControl'> <button data-type='cancle' class='btn btn-primary'>取消</button> <button data-type='save' class='btn btn-danger'>保存</button> </span></td></tr>");
+//            //绑定事件
+//            $tr.find("button").on("click", function () {
+//                var type = $(this).data("type");
+//                if (type == "remove") {
+//                    $(this).parents("tr").remove();
+//                } else if (type == "editor") {
+//                    //获取行tds 值  each:循环遍历
+//                    $(this).parents("tr").find("td").each(function (index, item) {
+//                        if ($(item).find("button").length > 0) {
+//                            $(item).find(".opControl").hide();
+//                            $(item).find(".saveControl").show();
+//                        } else {
+//                            $(item).html("<input type='text' value='" + $(item).text() + "'>");
+//                        }
+//                    });
+//                } else if (type == "cancle") {
+//                    //获取行tds 值  each:循环遍历
+//                    $(this).parents("tr").find("td").each(function (index, item) {
+//                        if ($(item).find("button").length > 0) {
+//                            $(item).find(".opControl").show();
+//                            $(item).find(".saveControl").hide();
+//                        } else {
+//                            $(item).html($(item).find("input").val());
+//                        }
+//                    });
+//                } else if (type == "save") {
+//                    $(this).parents("tr").find("td").each(function (index, item) {
+//                        if ($(item).find("button").length > 0) {
+//                            $(item).find(".opControl").show();
+//                            $(item).find(".saveControl").hide();
+//                        } else {
+//                            $(item).html($(item).find("input").val());
+//                        }
+//                    });
+//                }
+//            });
+//            $("#userList").append($tr);
+        });
+    });
+
+
+    //添加数据到table
+    function addUserInfoToTable(data) {
+        var $tr = $("<tr><td>" + data.name + "</td><td>" + data.sex + "</td><td>" + data.age + "</td><td>   <span class='opControl'> <button data-type='editor' class='btn btn-primary'>编辑</button> <button data-type='remove' class='btn btn-danger'>删除</button> </span> <span class='saveControl'> <button data-type='cancle' class='btn btn-primary'>取消</button> <button data-type='save' class='btn btn-danger'>保存</button> </span></td></tr>");
+        //绑定事件
+        $tr.find("button").on("click", function () {
+            var type = $(this).data("type");
+            if (type == "remove") {
+                $(this).parents("tr").remove();
+            } else if (type == "editor") {
+                //获取行tds 值  each:循环遍历
+                $(this).parents("tr").find("td").each(function (index, item) {
+                    if ($(item).find("button").length > 0) {
+                        $(item).find(".opControl").hide();
+                        $(item).find(".saveControl").show();
+                    } else {
+                        $(item).html("<input type='text' value='" + $(item).text() + "'>");
+                    }
+                });
+            } else if (type == "cancle") {
+                //获取行tds 值  each:循环遍历
+                $(this).parents("tr").find("td").each(function (index, item) {
+                    if ($(item).find("button").length > 0) {
+                        $(item).find(".opControl").show();
+                        $(item).find(".saveControl").hide();
+                    } else {
+                        $(item).html($(item).find("input").val());
+                    }
+                });
+            } else if (type == "save") {
+                $(this).parents("tr").find("td").each(function (index, item) {
+                    if ($(item).find("button").length > 0) {
+                        $(item).find(".opControl").show();
+                        $(item).find(".saveControl").hide();
+                    } else {
+                        $(item).html($(item).find("input").val());
+                    }
+                });
+            }
+        });
+        $("#userList").append($tr);
+    }
+</script>
+</body>
+</html>

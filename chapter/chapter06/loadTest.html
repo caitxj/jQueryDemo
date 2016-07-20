@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>load 方法测试使用</title>
+    <style>
+        #loadHtml{
+            border: 1px solid gray;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+<div id="loadHtml"></div>
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+    $(function () {
+        //测试load(url,[data],func)
+
+        //注意:跨域问题
+
+//        $("#loadHtml").load("http://www.baidu.com");
+
+        $("#loadHtml").load("../chapter04/animate.html");
+    });
+</script>
+</body>
+</html>

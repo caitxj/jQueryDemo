@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQ 提供的方法来过滤元素</title>
+</head>
+<body>
+<div>
+    <span data-www-dd="wwwdata">this is span</span>
+    <p>this is p</p>
+    <p class="ww">www</p>
+</div>
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+    $(function () {
+        //children(exp) :查找当前元的子元素, exp:过滤特定的子元素
+        var children=$("div").children();
+
+        //parent，parents()
+
+        //parent:获取父元素
+        var sparent=$("span").parent();
+
+
+        //parents()
+
+        var sparents=$("span").parents();
+
+        //:has
+        $("div:has(.ww)").css("color","red");
+
+        // 获取 data-xxx  $().data('xxx')进行数据获取
+        alert($("span").data("www-dd"));
+    });
+</script>
+</body>
+</html>

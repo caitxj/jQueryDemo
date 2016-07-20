@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax Test</title>
+</head>
+<body>
+<h1>ajax test</h1>
+<script src="../../lib/jquery-1.12.2.js"></script>
+<script>
+    $(function () {
+
+        /**
+         * 1.跨域只支持http请求的不同域间的操作，不支持 2个不同域间页面操作页面
+         * 2.跨越只支持get 方式
+         */
+
+
+//        $.ajax({
+//            url:"http://www.anycoop.com/vlink/findRooms.action",
+//            data:{
+//                "loginName":"caiqingliang"
+//            },
+//            type:"get",
+//            dataType:"jsonp",
+//            success:function(data){
+//                alert(data.data);
+//            }
+//        });
+
+        //对于jsonp 格式的使用
+        //server:  jsonpCallbakc(json字符串)
+        //client: dataType:jsonp  |
+        $.ajax({
+            url:"http://localhost:8080/mvtest/FirstServelt",
+            type:"get",
+            dataType:"jsonp",
+            jsonp: "callback",
+            success:function(data){
+                alert(data);
+            }
+        });
+    });
+</script>
+</body>
+</html>
